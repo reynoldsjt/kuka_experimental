@@ -76,7 +76,9 @@ class KukaHardwareInterface : public hardware_interface::RobotHW
 {
 
 private:
-
+  //debug struct
+  joint_debug debug_bob_;
+  std::unique_ptr<UDPServer> debug_server_;
   // ROS node handle
   ros::NodeHandle nh_;
 
@@ -90,6 +92,17 @@ private:
   std::vector<double> joint_position_command_;
   std::vector<double> joint_velocity_command_;
   std::vector<double> joint_effort_command_;
+  //DEBUG STUFF
+  std::vector<double> des_;
+  std::vector<double> des_prev_;
+  std::vector<double> des_prev_prev_;
+  std::vector<double> des_vel_;
+  std::vector<double> des_vel_prev_;
+  std::vector<double> des_acl_;
+  double time_;
+  double prev_time_;
+  double prev_prev_time_;
+
 
   // RSI
   RSIState rsi_state_;
