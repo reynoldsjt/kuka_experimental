@@ -176,11 +176,11 @@ namespace kuka_rsi_hw_interface
     server_.reset(new UDPServer(local_host_, local_port_));
 
     // setup debug server
-    std::string d_recv_ip = "127.0.0.1";
-    //std::string d_recv_ip = "192.168.1.45";
+    //std::string d_recv_ip = "127.0.0.1";
+    std::string d_recv_ip = "192.168.1.45";
     int d_recv_port = 7777;
-    //std::string d_send_ip = "192.168.1.44";
-    std::string d_send_ip = "127.0.0.1";
+    std::string d_send_ip = "192.168.1.44";
+    //std::string d_send_ip = "127.0.0.1";
     int d_send_port = 7778;
     debug_server_.reset(new UDPServer(d_recv_ip, d_recv_port, d_send_ip, d_send_port));
 
