@@ -39,7 +39,7 @@
 
 #include <kuka_rsi_hw_interface/kuka_hardware_interface.h>
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
   ROS_INFO_STREAM_NAMED("hardware_interface", "Starting hardware interface...");
 
@@ -71,8 +71,9 @@ int main(int argc, char** argv)
 
   // Run as fast as possible
   while (ros::ok())
-  //while (!g_quit)
+  // while (!g_quit)
   {
+
     // Receive current state from robot
     if (!kuka_rsi_hw_interface.read(timestamp, period))
     {
@@ -97,5 +98,4 @@ int main(int argc, char** argv)
   ROS_INFO_STREAM_NAMED("hardware_interface", "Shutting down.");
 
   return 0;
-
 }
