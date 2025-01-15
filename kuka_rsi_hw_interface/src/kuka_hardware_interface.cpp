@@ -165,7 +165,11 @@ namespace kuka_rsi_hw_interface
     debug_bob_.period = period.toSec();
     out_buffer_ = RSICommand(rsi_joint_position_corrections_, ipoc_).xml_doc;
     server_->send(out_buffer_);
-    debug_server_->send((char *)&debug_bob_, sizeof(debug_bob_));
+    // only send debug info if we set up the debug server correctly earlier
+    if (debug_server_working_)
+    {
+      debug_server_->send((char *)&debug_bob_, sizeof(debug_bob_));
+    }
 
     return true;
   }
@@ -176,13 +180,21 @@ namespace kuka_rsi_hw_interface
     server_.reset(new UDPServer(local_host_, local_port_));
 
     // setup debug server
-    //std::string d_recv_ip = "127.0.0.1";
+    // std::string d_recv_ip = "127.0.0.1";
     std::string d_recv_ip = "192.168.1.45";
     int d_recv_port = 7777;
     std::string d_send_ip = "192.168.1.44";
-    //std::string d_send_ip = "127.0.0.1";
+    // std::string d_send_ip = "127.0.0.1";
     int d_send_port = 7778;
-    debug_server_.reset(new UDPServer(d_recv_ip, d_recv_port, d_send_ip, d_send_port));
+    try
+    {
+      debug_server_.reset(new UDPServer(d_recv_ip, d_recv_port, d_send_ip, d_send_port));
+    }
+    catch (const std::runtime_error &e)
+    {
+      ROS_ERROR_STREAM_NAMED("kuka_hardware_interface", "Debug hardware interface server not set up! on " << d_recv_ip << " sending to " << d_send_ip << ":" << d_send_port);
+      debug_server_working_ = false;
+    }
 
     ROS_INFO_STREAM_NAMED("kuka_hardware_interface", "Waiting for robot!");
 
