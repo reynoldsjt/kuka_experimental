@@ -11,6 +11,6 @@
   <arg name="rsi_hw_iface_port" default="49152"/>
 
 
-  <node pkg="kuka_rsi_simulator" type="kuka_rsi_simulator" name="kuka_rsi_simulator" args="$(arg rsi_hw_iface_ip) $(arg rsi_hw_iface_port)"/>
+  <node pkg="kuka_rsi_simulator" type="kuka_rsi_simulator.py" name="kuka_rsi_simulator" args="$(arg rsi_hw_iface_ip) $(arg rsi_hw_iface_port)"/>
 
 </launch>
