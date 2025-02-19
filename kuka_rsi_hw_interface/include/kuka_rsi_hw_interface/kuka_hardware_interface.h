@@ -65,6 +65,9 @@
 #include <kuka_rsi_hw_interface/rsi_state.h>
 #include <kuka_rsi_hw_interface/rsi_command.h>
 
+// RT priority
+#include <kuka_rsi_hw_interface/assign_rt_priority.h>
+
 namespace kuka_rsi_hw_interface
 {
 

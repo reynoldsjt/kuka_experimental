@@ -50,6 +50,8 @@ int main(int argc, char **argv)
 
   ros::NodeHandle nh;
 
+  kuka_rsi_hw_interface::assign_max_rt_priority();
+
   kuka_rsi_hw_interface::KukaHardwareInterface kuka_rsi_hw_interface;
   kuka_rsi_hw_interface.configure();
 
